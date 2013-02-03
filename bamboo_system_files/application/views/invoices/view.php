@@ -137,8 +137,6 @@ if ($row->amount_paid < $row->total_with_tax):
 		</strong>
 	</p>
 
-	<p><?php echo $this->lang->line('invoice_status') . ': ' . $status;?></p>
-
 	<hr />
 
 	<h3><?php echo $row->name;?></h3>
@@ -168,22 +166,31 @@ if ($row->amount_paid < $row->total_with_tax):
 			<td><p><?php echo str_replace('.00', '', $item->quantity);?></p></td>
 			<td><?php echo auto_typography($item->work_description);?></td>
 			<td><p><?php echo $this->settings_model->get_setting('currency_symbol') . str_replace('.', $this->config->item('currency_decimal'), $item->amount);?> <?php if ($item->taxable == 0){echo '(' . $this->lang->line('invoice_not_taxable') . ')';}?></p></td>
-			<td><p><?php echo $this->settings_model->get_setting('currency_symbol') . number_format($item->quantity * $item->amount, 2, $this->config->item('currency_decimal'), '');?></p></td>
+			<td><p align='right'><?php echo $this->settings_model->get_setting('currency_symbol') . number_format($item->quantity * $item->amount, 2, $this->config->item('currency_decimal'), '');?></p></td>
 		</tr>
 		<?php endforeach;?>
+        <tr>
+            <td></td>
+            <td><strong>Subtotal:</strong></td>
+            <td></td>
+            <td><p align='right'><?php echo $total_no_tax;?></p></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><strong>NY State Sales Tax (8.875%):</strong></td>
+            <td></td>
+            <td><p align='right'><?php echo $tax_info;?></p></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><strong>Total:</strong></td>
+            <td></td>
+            <td><p align='right'><?php echo $total_with_tax;?></p></td>
+        </tr>
 	</table>
 
 	<p>
-		<?php echo $total_no_tax;?>
-		<?php echo $tax_info;?>
-		<?php echo $total_with_tax;?>
-		<?php echo $total_paid;?>
-		<?php echo $total_outstanding;?>
-	</p>
-
-	<p>
-		<strong><?php echo $this->lang->line('invoice_payment_term');?>: <?php echo $this->settings_model->get_setting('days_payment_due');?> <?php echo $this->lang->line('date_days');?></strong> 
-		(<?php echo $date_invoice_due;?>)
+		<strong><?php echo $this->lang->line('invoice_payment_term');?>: Upon Receiving</strong> 
 	</p>
 
 	<?php if ($companyInfo->tax_code != ''):?>

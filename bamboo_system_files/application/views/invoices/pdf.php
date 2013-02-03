@@ -163,8 +163,8 @@ table.stripe td {
 	</p>
 
 	<p>
-		<strong><?php echo $this->lang->line('invoice_payment_term');?>: <?php echo $this->settings_model->get_setting('days_payment_due');?> <?php echo $this->lang->line('date_days');?></strong> 
-		(<?php echo $date_invoice_due;?>)
+        <strong><?php echo $this->lang->line('invoice_payment_term');?>: Upon Receiving
+</strong> 
 	</p>
 
 	<?php if ($companyInfo->tax_code != ''):?>
